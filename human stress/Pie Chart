@@ -1,0 +1,57 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+#correct the path file
+file_path = r"C:\Users\swapn\OneDrive\Desktop\infosys\human stress\stress_detection _dataset.csv"
+# use read_csv for a csv file
+df = pd.read_csv(file_path)
+#Display the first few rows
+print(df)
+# Pie Chart
+stress_counts = df['Stress'].value_counts()
+plt.figure(figsize=(8, 6))
+plt.pie(stress_counts, labels=['No Stress (0)','Stress (1)'], autopct='%1.1f%%',startangle=90)
+plt.title('Distribution of Stress Levels')
+plt.axis('equal')
+plt.show()
+
+#bar chart
+plt.figure(figsize=(8,6))
+stress_counts.plot(kind='bar', color=['blue','lightcoral'])
+plt.title('Bargraph  of Stress Levels')
+plt.xlabel('Stress Levels')
+plt.ylabel('Count')
+plt.xticks(ticks=np.arange(len(stress_counts)),labels=['No Stress (0)','Stress (1)'],rotation=0)
+plt.grid(axis='y')
+plt.show()
+
+# Box Plot
+plt.figure(figsize=(8, 6))
+sns.boxplot(data=df[['Snoring rate', 'Respiratory Rate']])
+plt.title('Box Plot of Snoring and Respiratory Rates')
+plt.ylabel('Values')
+plt.show()
+
+#Scatter Plot
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Limb Movements'], df['Respiratory Rate'], color='red', alpha=0.5)
+plt.title('Scatter Plot of Limb Movements vs Respiratory Rate')
+plt.xlabel('Limb Movements')
+plt.ylabel('Respiratory Rate')
+plt.grid()
+plt.show()
+
+
+
+
+
+# Histogram
+plt.figure(figsize=(8, 6))
+plt.hist(df['Blood Oxygen'], bins=20, alpha=0.5, label='Blood Oxygen', color='green')
+plt.hist(df['Respiratory Rate'], bins=20, alpha=0.5, label='Respiratory Rate', color='orange')
+plt.title('Histogram of Blood Oxygen and Respiratory Rates')
+plt.xlabel('Rate')
+plt.ylabel('Frequency')
+plt.legend()
+plt.show()
